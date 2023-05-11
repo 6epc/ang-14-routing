@@ -28,6 +28,8 @@ export class PostComponent implements OnInit {
     // !Note If there is an asyn operation to retrieve data, it will be done first, and then the routing will be triggered. And with the existing data we will see a working page.
     this.activatedRoute.data.subscribe(data => this.post = data['post']);
 
+    this.activatedRoute.data.subscribe(({post}) => this.post = post);
+
     //It is better to use observable then snapshot cause of dinamyc in observable
     // this.activatedRoute.params.subscribe(params => {
     //   this.post = this.postsService.getById(+params['id'])!;
