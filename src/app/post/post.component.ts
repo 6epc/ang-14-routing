@@ -26,7 +26,7 @@ export class PostComponent implements OnInit {
     // In this case: data['post'] - is  resolve: {post: PostResolver} from app-routing
     // !Note Resolver gives us Opportunity to process the data before triggering routing
     // !Note If there is an asyn operation to retrieve data, it will be done first, and then the routing will be triggered. And with the existing data we will see a working page.
-    this.activatedRoute.data.subscribe(data => this.post = data['post']);
+<!--     this.activatedRoute.data.subscribe(data => this.post = data['post']); -->
 
     this.activatedRoute.data.subscribe(({post}) => this.post = post);
 
