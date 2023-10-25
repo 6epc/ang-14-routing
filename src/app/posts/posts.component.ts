@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ResolveEnd, ResolveStart, Router } from '@angular/router';
 import { Post, PostsService } from '../posts.service';
+import { Observable, filter, map, merge } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
@@ -10,6 +11,10 @@ import { Post, PostsService } from '../posts.service';
 export class PostsComponent implements OnInit {
   posts!: Post[];
   showIds = false;
+
+  hideLoader!: Observable<boolean>;
+  showLoader!: Observable<boolean>;
+  isLoading!: Observable<boolean>;
 
   constructor(
     private postsService: PostsService,
@@ -23,6 +28,10 @@ export class PostsComponent implements OnInit {
       this.showIds = !!params['showIds'];
       console.log(params);
     })
+
+    this.hideLoader = this.router.events.pipe(filter((e:any) => e instanceof ResolveEnd), map(e => false));
+    this.showLoader = this.router.events.pipe(filter((e:any) => e instanceof ResolveStart), map(e => true));
+    this.isLoading = merge(this.hideLoader, this.showLoader);
   }
 
   showIdsProgram() {

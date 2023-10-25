@@ -1,7 +1,7 @@
-import { PostsService } from './../posts.service';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { delay, Observable, of } from 'rxjs';
+import { PostsService } from './../posts.service';
 import { Post } from '../posts.service';
 
 @Injectable({ providedIn: 'root' })

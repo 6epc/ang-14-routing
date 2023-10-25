@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, delay, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,14 @@ export class AuthService {
     console.log('Login: ', this.isAuth);
   }
 
-  isAuthenticated(): Promise<boolean> {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(this.isAuth);
-      }, 1000);
-    })
+  isAuthenticated(): Observable<boolean> {
+    // we can return Promise<boolean> or Observeable<boolean> or boolean
+    // return new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve(this.isAuth);
+    //   }, 1000);
+    // })
+
+    return of(this.isAuth).pipe(delay(500));
   }
 }
